@@ -6,6 +6,7 @@ D:\workspace\taotao-manager\src\main\java\com\cindy\controller\TbItemCatControll
 D:\workspace\taotao-manager\src\main\java\com\cindy\common\ZTreeNodeResult.java
 D:\workspace\taotao-manager\src\main\java\com\cindy\service\impl\TbItemServiceImpl.java
 D:\workspace\taotao-manager\src\main\java\com\cindy\service\impl\TbItemCatServiceImpl.java
+D:\workspace\taotao-manager\src\main\java\com\cindy\common\EchartsResult.java
 D:\workspace\taotao-manager\src\main\java\com\cindy\bean\TbItem.java
 D:\workspace\taotao-manager\src\main\java\com\cindy\mapper\TbItemMapper.java
 D:\workspace\taotao-manager\src\main\java\com\cindy\service\TbItemCatService.java

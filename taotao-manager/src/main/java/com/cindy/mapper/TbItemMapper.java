@@ -27,6 +27,10 @@ public interface TbItemMapper {
 
 	List<TbItem> findTbItemBySearchPage(@Param("index")int index, @Param("limit")Integer limit, @Param("title")String title, @Param("priceMin")Integer priceMin, 
 			@Param("priceMax")Integer priceMax, @Param("cId")Long cId);
+
+	List<TbItem> statisticsItemCId();//统计商品分类
+
+	int findTbItemCountByCId(@Param("cId")Long cId);//根据商品id查询分类下的商品数量
 	
 	
 

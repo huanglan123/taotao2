@@ -7,8 +7,10 @@
 <title>淘淘商城</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/layui/css/layui.css">
+<script src="${pageContext.request.contextPath }/layui/layui.js"></script>
 <script src="${pageContext.request.contextPath }/js/jquery-2.1.0.min.js"></script>
 <script src="${pageContext.request.contextPath }/js/index.js"></script>
+<script src="${pageContext.request.contextPath }/js/echarts-en.common.min.js"></script>
 </head>
 <body class="layui-layout-body">
 	<div class="layui-layout layui-layout-admin">
@@ -32,6 +34,7 @@
 			</ul>
 		</div>
 
+		  
 		<div class="layui-side layui-bg-black">
 			<div class="layui-side-scroll">
 				<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
@@ -116,30 +119,123 @@
 			<!-- 内容主体区域
 				 $("#content").load("/jsp/showItem.jsp");
 			 -->
-			<div id="content" style="padding: 15px;">内容主体区域</div>
-		</div>
+			<div id="content" style="background-color: #F2F2F2; height: 100%">
+				<div style="padding: 20px; background-color: #F2F2F2;">
+					<div class="layui-row layui-col-space15">
+						<div class="layui-col-md3">
+							<div class="layui-card">
+								<div class="layui-card-header">
+									<div>
+										<span>访问量</span> <span style="float: right;margin-top: 13px" class="layui-badge layui-bg-blue">周</span>
+									</div>
+								</div>
+								<div class="layui-card-body">
+									<span style="font-size: 36px; color: #676767">99999</span></br> </br> <span
+										style="color: #676767">总访问量</span>
+									<i style="float: right;" class="layui-icon layui-icon-flag"></i>  
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-md3">
+							<div class="layui-card">
+								<div class="layui-card-header">
+									<span>每天收入 </span>
+									<span style="float: right;margin-top: 13px" class="layui-badge layui-bg-orange">天</span>
+								</div>
+							
+								<div class="layui-card-body">
+									<span style="font-size: 36px; color: #676767">5000</span></br> </br> <span
+										style="color: #676767">总收入</span>
+									<i style="float: right;" class="layui-icon layui-icon-rmb"></i>  
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-md3">
+							<div class="layui-card">
+								<div class="layui-card-header">
+									<div>
+										<span>用户总数</span> <span style="float: right;margin-top: 13px" class="layui-badge layui-bg-green">月</span>
+									</div>
 
-		<div class="layui-footer">
-			<!-- 底部固定区域 -->
-			© 欢迎来到淘淘商城后台管理系统
+								</div>
+								<div class="layui-card-body">
+									<span style="font-size: 36px; color: #676767">8000</span></br> </br> <span
+										 style="color: #676767">总用户数</span>
+									<i style="float: right;" class="layui-icon layui-icon-user"></i>  
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-md3">
+							<div class="layui-card">
+								<div class="layui-card-header">
+									<div>
+										<span>新增用户</span> <span style="float: right;margin-top: 13px" class="layui-badge">天</span>
+									</div>
+
+								</div>
+								<div class="layui-card-body">
+									<span style="font-size: 36px; color: #676767">16</span></br> </br> <span
+										style="color: #676767">新增人数</span>
+									<i style="float: right;" class="layui-icon layui-icon-user"></i>  
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-md12">
+							<div class="layui-col-md6">
+								<div class="layui-card">
+									<div class="layui-card-header">商品分类统计</div>
+									<div class="layui-card-body">
+										<div id="echartsMain1" style="width: 400px; height: 400px;"></div>
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-md6">
+								<div class="layui-card">
+									<div class="layui-card-header">当前地址</div>
+									<div class="layui-card-body">
+										<div style="width: 400px;height: 400px" id="allmap"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+		<div class="layui-footer" style="background-color: #2F4056">
+		<span style="color: #01AAED">©www.cindy.com - 淘淘商城</span></div>
 	</div>
-	<script src="${pageContext.request.contextPath }/layui/layui.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/js/jquery-2.1.0.min.js"></script>
+	
+		
+	</div>
 
-	<script>
-		//JavaScript代码区域
-		layui.use('element', function(){
-		  var element = layui.element;
-		  
-		});
-		$("#showItem").click(function(){
-			 $("#content").load("/jsp/showItem.jsp");
-		})
-		$("#addItemCat").click(function(){
-			$("#content").load("/jsp/addItemCat.jsp");
-		})
-	</script>
+
+		<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart1 = echarts.init(document.getElementById('echartsMain1'));
+        var weatherIcons = {
+        };
+        $.get('/itemCat/statisticsItem').done(function (resule) {
+            myChart1.setOption({
+            	title: {
+    		        text: '商品分类统计',
+    		        left: 'center'
+    		    },
+    		    tooltip: {
+    		        trigger: 'item',
+    		        formatter: '{a} <br/>{b} : {c} ({d}%)'
+    		    },
+    		    series: [
+    		        {
+    		            type: 'pie',
+    		            radius: '65%',
+    		            center: ['50%', '50%'],
+    		            selectedMode: 'single',
+    		            data:resule
+    		        }
+    		    ]
+            });
+        })
+    </script>
 </body>
 </html>

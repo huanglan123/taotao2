@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cindy.common.EchartsResult;
 import com.cindy.common.ZTreeNodeResult;
 import com.cindy.service.TbItemCatService;
 
@@ -28,5 +29,12 @@ public class TbItemCatController {//根据选择的分类来搜索
 		List<ZTreeNodeResult> result = tbItemCatService.findTbItemCatById(parentId);
 		//根据分类id查
 		return result;
+	}
+	
+	@RequestMapping("/statisticsItem")
+	@ResponseBody 
+	public List<EchartsResult> showEcharts(){//分类统计扇形图
+		List<EchartsResult> results = tbItemCatService.statisticsItem();
+		return results;
 	}
 }
